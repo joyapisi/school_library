@@ -1,8 +1,8 @@
 class Student < Person
     def initialize (name = "Unknown", age, parent_permission = true, classroom)
-        @name = name
-        @age = age
-        @parent_permission = parent_permission
+        super @name = name
+        super @age = age
+        super @parent_permission = parent_permission
         @classroom = classroom
     end
 
