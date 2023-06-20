@@ -4,6 +4,7 @@ class Person
         @age = age
         @parent_permission = parent_permission
     end
+end
 
     attr_writer :id
     attr_accessor :name
@@ -26,4 +27,4 @@ class Person
     end
 
     private :can_use_services?
-end
+
