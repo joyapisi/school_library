@@ -1,8 +1,8 @@
 class Person
     def initialize (name = "Unknown", age, parent_permission = true)
-        @name
-        @age
-        @parent_permission
+        @name = name
+        @age = age
+        @parent_permission = parent_permission
     end
 
     attr_writer :id
