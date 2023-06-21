@@ -1,4 +1,5 @@
 require './person'
+require './classroom'
 
 attr_accessor :classroom
 
@@ -7,12 +8,10 @@ class Student < Person
     super(age, name, parent_permission)
 
     @classroom = classroom
-    classroom.student.push(self) unless classroom.student.include?self
+    classroom.student.push(self) unless classroom.student.include? self
   end
 
   def play_hooky
     p '¯\(ツ)/¯'
   end
-
-  
 end
