@@ -6,6 +6,7 @@ class Person < Nameable
     @age = age
     @name = name
     @parent_permission = parent_permission
+    super()
   end
 
   def of_age?

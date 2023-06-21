@@ -6,4 +6,5 @@ class TrimmerDecorator < BaseDecorator
          trimmed_name = @nameable.correct_name[0, 10].strip
          p trimmed_name
        end
+    end
 end
