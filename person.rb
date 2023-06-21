@@ -1,3 +1,5 @@
+require './nameable.rb'
+
 class Person < Nameable
   attr_writer :id
   attr_accessor :name, :age
@@ -13,11 +15,11 @@ class Person < Nameable
     @age >= 18
   end
 
+  private :of_age?
+  
   def can_use_services?
     @parent_permission == true || @age >= 18
   end
-
-  private :of_age?
 
   def correct_name
     @name

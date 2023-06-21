@@ -1,3 +1,5 @@
+require './base_deco.rb'
+
 class TrimmerDecorator < BaseDecorator
   def correct_name
     if @nameable.correct_name.length <= 10
