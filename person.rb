@@ -1,4 +1,4 @@
-class Person
+class Person < Nameable
   attr_writer :id
   attr_accessor :name, :age
 
@@ -17,4 +17,8 @@ class Person
   end
 
   private :of_age?
+
+  def correct_name
+    @name
+  end
 end
