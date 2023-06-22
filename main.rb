@@ -65,3 +65,12 @@ def create_person(app)
       option = gets.chomp.to_i
       if option == 1
         app.list_books
+    elsif option == 2
+        app.list_peoples
+      else
+        status = handel_option(option, app)
+      end
+    end
+  end
+  
+  main
