@@ -1,58 +1,63 @@
 require './app.rb'
 
 def user_options
-    p "Please choose an option by entering a number:
-    1 - List all list_books
-    2 - List all list_people
+    puts 'Please choose an option by entering a number:
+    1 - List all books
+    2 - List all people
     3 - Create a person
     4 - Create a book
     5 - Create a rental
     6 - List all rentals for a given person id
-    7 - Exit"
+    7 - Exit'
     number = gets.chomp.to_i
-    p "#{number}"
+    puts "#{number}"
 end
 
 def create_person(app)
-    puts 'Do you want to create a student(1) or a teacher(2)? [Input the number]:-'
-    option = gets.chomp
+    puts 'Do you want to create a student(1) or a teacher(2)? [Input the number]:'
+    input_option = gets.chomp.to_i
     parent_permission = true
-    puts 'age:-'
+    puts 'Age:'
     age = gets.chomp.to_i
-    puts 'name:-'
+    puts 'Name:'
     name = gets.chomp
-    puts 'Has parent permission?[Y/N]'
+    puts 'Has parent permission?[Y/N]:'
     val = gets.chomp
     parent_permission = false if %w[N n NO no No].include?(val)
-    case option.to_i
+    
+    case input_option.to_i
     when 1
       app.create_student(age, name, parent_permission)
     when 2
-      puts 'specialization:-'
+      puts 'Specialization:'
       specialization = gets.chomp
       app.create_teacher(age, specialization, name, parent_permission)
     else
-      puts 'Invalid input ):'
+      puts 'Oops! Wrong input.'
     end
   end
 
-  def handel_option(option, app)
-    case option
+  def sort_input_option(input_option, app)
+    case input_option
     when 3
       create_person(app)
     when 4
       app.create_book
+      puts 'Title:'
+      title = gets.chomp
+      puts 'Author:'
+      author = gets.chomp
     when 5
       app.create_rental
     when 6
-      puts 'Enter person ID:-'
+      puts 'ID of person:'
       id = gets.chomp.to_i
       app.list_person_rentals(id)
     when 7
-      puts 'Thanks You!!...'
+      puts 'Thank you for using this app!'
       return false
     else
-      puts 'Invalid option. Please try again.'
+      puts 'Oops! Wrong input. Please try again'
     end
     true
   end
@@ -61,14 +66,14 @@ def create_person(app)
     status = true
     app = App.new
     while status
-      run_option
-      option = gets.chomp.to_i
-      if option == 1
+      run_input_option
+      input_option = gets.chomp.to_i
+      if input_option == 1
         app.list_books
-    elsif option == 2
+    elsif input_option == 2
         app.list_peoples
       else
-        status = handel_option(option, app)
+        status = sort_input_option(input_option, app)
       end
     end
   end
