@@ -38,4 +38,18 @@ def create_rental()
     @peoples.each.with_index do |person, idx|
       puts "#{idx}) [#{person.class.name}] Name #{person.name}, ID #{person.id}, Age #{person.age}"
     end
+    person_index = gets.chomp.to_i
+    puts 'Date:-'
+    date = gets.chomp
+    Rental.new(@books[book_index], @peoples[person_index], date)
+end
+
+def list_rentals()
+    @peoples.each do |person|
+        if person.id == person_id
+          puts 'Rentals:-'
+          person.rentals.each { |rental| puts "Date #{rental.date}, Book #{rental.book.title} by #{rental.book.author}" }
+        end
+    end
+end
 end
