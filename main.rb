@@ -48,10 +48,6 @@ def sort_option(choice, app)
     create_person(app)
   when 4
     app.create_book
-    puts 'Title:'
-    gets.chomp
-    puts 'Author:'
-    gets.chomp
   when 5
     app.create_rental
   when 6
@@ -78,7 +74,7 @@ def main
     elsif choice == 2
       app.list_peoples
     else
-      status = sort_inpt_option(choice, app)
+      status = sort_option(choice, app)
     end
   end
 end

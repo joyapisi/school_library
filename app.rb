@@ -29,6 +29,10 @@ class App
   end
 
   def create_book()
+    puts 'Title:'
+    gets.chomp
+    puts 'Author:'
+    gets.chomp
     @books << Book.new(title, author)
   end
 
