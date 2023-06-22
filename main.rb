@@ -56,3 +56,12 @@ def create_person(app)
     end
     true
   end
+
+  def main
+    status = true
+    app = App.new
+    while status
+      run_option
+      option = gets.chomp.to_i
+      if option == 1
+        app.list_books
