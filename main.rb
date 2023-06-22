@@ -1,3 +1,5 @@
+require './app.rb'
+
 def user_options
     p "Please choose an option by entering a number:
     1 - List all list_books
