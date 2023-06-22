@@ -4,8 +4,6 @@ require './student'
 require 'book'
 require 'rental'
 
-
-
 class App 
     def initialize
         @books = []
