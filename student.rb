@@ -8,6 +8,7 @@ class Student < Person
     super(age, parent_permission, name)
 
     @classroom = classroom
+    classroom.student.push(self) unless classroom.student.include? self
   end
 
   def allocate_classroom(classroom)
