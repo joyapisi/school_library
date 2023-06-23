@@ -1,14 +1,18 @@
 require './person'
 require './classroom'
 
-attr_accessor :classroom
-
 class Student < Person
+  attr_accessor :classroom
+
   def initialize(classroom, age, name = 'Unknown', parent_permission: true)
-    super(age, name, parent_permission)
+    super(age, parent_permission, name)
 
     @classroom = classroom
-    classroom.student.push(self) unless classroom.student.include? self
+  end
+
+  def allocate_classroom(classroom)
+    # @classroom = classroom
+    classroom.students.push(self) unless classroom.student.include?(self)
   end
 
   def play_hooky

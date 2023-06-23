@@ -1,13 +1,14 @@
 require './person'
 require './teacher'
 require './student'
-require 'book'
-require 'rental'
+require './book'
+require './rental'
 
 class App
   def initialize
     @books = []
     @peoples = []
+    @rentals = []
   end
 
   def list_books()
@@ -20,19 +21,19 @@ class App
     end
   end
 
-  def create_teacher(age, specialization, parent_permission, name)
-    @peoples << Teacher.new(age, specialization, parent_permission: parent_permission, name: name)
+  def create_teacher(specialization, age, name)
+    @peoples << Teacher.new(age, name, specialization)
   end
 
   def create_student(age, name, parent_permission)
-    @peoples << Student.new(age, name, parent_permission: parent_permission)
+    @peoples << Student.new(nil, age, name, parent_permission: parent_permission)
   end
 
   def create_book()
     puts 'Title:'
-    gets.chomp
+    title = gets.chomp
     puts 'Author:'
-    gets.chomp
+    author = gets.chomp
     @books << Book.new(title, author)
   end
 
@@ -47,16 +48,16 @@ class App
     person_index = gets.chomp.to_i
     puts 'Date:-'
     date = gets.chomp
-    Rental.new(@books[book_index], @peoples[person_index], date)
+    @rentals << Rental.new(date, @books[book_index], @peoples[person_index])
   end
 
   def list_rentals()
-    @peoples.each do |person|
-      next unless person.id == person_id
-
-      puts 'Rentals:-'
-      person.rentals.each do |rental|
-        puts "Date #{rental.date}, Book #{rental.book.title} by #{rental.book.author}"
+    id = gets.chomp.to_i
+    @rentals.each do |rental|
+      if rental.person.id.eql?(id)
+        puts "Date: #{rental.date} Book: #{rental.book.title} by #{rental.book.author}"
+      else
+        puts 'Person does not exist'
       end
     end
   end

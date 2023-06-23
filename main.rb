@@ -9,15 +9,11 @@ def user_options
     5 - Create a rental
     6 - List all rentals for a given person id
     7 - Exit'
-  number = gets.chomp.to_i
-  puts number
 end
 
 def create_person(app)
   puts 'Do you want to create a student(1) or a teacher(2)? [Input the number]:'
   choice = gets.chomp.to_i
-
-  parent_permission = ask_for_permission
 
   puts 'Age:'
   age = gets.chomp.to_i
@@ -26,11 +22,12 @@ def create_person(app)
 
   case choice
   when 1
+    parent_permission = ask_for_permission
     app.create_student(age, name, parent_permission)
   when 2
     puts 'Specialization:'
     specialization = gets.chomp
-    app.create_teacher(age, specialization, name, parent_permission)
+    app.create_teacher(specialization, age, name)
   else
     puts 'Oops! Wrong input.'
   end
@@ -52,8 +49,7 @@ def sort_option(choice, app)
     app.create_rental
   when 6
     puts 'ID of person:'
-    id = gets.chomp.to_i
-    app.list_person_rentals(id)
+    app.list_rentals
   when 7
     puts 'Thank you for using this app!'
     return false
@@ -67,12 +63,12 @@ def main
   status = true
   app = App.new
   while status
-    run_choice
+    user_options
     choice = gets.chomp.to_i
     if choice == 1
       app.list_books
     elsif choice == 2
-      app.list_peoples
+      app.list_people
     else
       status = sort_option(choice, app)
     end
