@@ -150,6 +150,12 @@ If you think that change is necessary - open a Pull Request in this repository a
 - Twitter: (https://twitter.com/joyapisi)
 - LinkedIn: (https://linkedin.com/in/joy-phoebe-00b80a13a)
 
+   **Amarachi Dimkpa**
+
+- GitHub: [@amazinggacee](https://github.com/Amazinggracee)
+- Twitter: [@amazinggaceu](https://twitter.com/amazinggraceu)
+- LinkedIn: [Amarachi Dimkpa](https://linkedin.com/in/amarachi-dimkpa-070643183)
+
 ## 🤝 Contributing <a name="contributing"></a>
 
 - GitHub: (https://github.com/Shaheryar0054)
