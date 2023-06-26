@@ -16,8 +16,8 @@ class App
   end
 
   def list_people()
-    @peoples.each do |people|
-      puts "[#{people.class.name}] Name: #{people.name} ID: #{people.id} Age: #{people.age} \n"
+    @peoples.each { |people|
+      puts "[#{people.class.name}] Name: #{people.name} ID: #{people.id} Age: #{people.age} \n" }
     end
   end
 
@@ -46,7 +46,7 @@ class App
       puts "#{idx}) [#{person.class.name}] Name #{person.name}, ID #{person.id}, Age #{person.age}"
     end
     person_index = gets.chomp.to_i
-    puts 'Date:-'
+    puts 'Date:'
     date = gets.chomp
     @rentals << Rental.new(date, @books[book_index], @peoples[person_index])
   end

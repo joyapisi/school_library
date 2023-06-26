@@ -1,6 +1,7 @@
 require './app'
 
 def user_options
+  puts 'Welcome to School Library App!'
   puts 'Please choose an option by entering a number:
     1 - List all books
     2 - List all people
