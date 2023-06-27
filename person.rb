@@ -1,8 +1,9 @@
 require './nameable'
 
 class Person < Nameable
-  attr_reader :id, :parent_permission, :rentals
-  attr_accessor :name, :age
+  attr_reader :id
+  # :parent_permission, :rentals
+  attr_accessor :name, :age, :rentals
 
   def initialize(age, parent_permission, name = 'Unknown')
     @id = Random.rand(0..1000)
@@ -13,15 +14,19 @@ class Person < Nameable
     super()
   end
 
-  def to_h
-    {
-      type: self.class.name,
-      age: @age,
-      name: @name,
-      parent_permission: @parent_permission,
-      rentals: @rentals
-    }
-  end
+  # def full_name
+  #   "#{@name[:first_name]} #{@name[:last_name]}"
+  # end
+
+  # def to_h
+  #   {
+  #     type: self.class.name,
+  #     age: @age,
+  #     name: @name,
+  #     parent_permission: @parent_permission,
+  #     rentals: @rentals
+  #   }
+  # end
 
   def of_age?
     @age >= 18
@@ -37,7 +42,10 @@ class Person < Nameable
     @name
   end
 
-  def add_rental(book, date)
-    Rental.new(date, book, self)
+  def add_rental(rental)
+    @rentals.append(rental)
   end
+  # def add_rental(book, date)
+  #   Rental.new(date, book, self)
+  # end
 end

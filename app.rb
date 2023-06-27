@@ -10,9 +10,9 @@ class App
     # @books = []
     # @peoples = []
     # @rentals = []
-    @books = load_data_from_json('books.json')
-    @peoples = load_data_from_json('people.json')
-    @rentals = load_data_from_json('rentals.json')
+    @books = load_data_from_json('books.json') 
+    @peoples = load_data_from_json('people.json') 
+    @rentals = load_data_from_json('rentals.json') 
   end
 
   def list_books()
@@ -24,8 +24,8 @@ class App
   def list_people()
     @peoples = load_data_from_json('people.json')
     puts 'No person entered yet.' if @peoples.empty?
-    @peoples.each do |people|
-      puts "[#{people.class.name}] Name: #{people.name} ID: #{people.id} Age: #{people.age} \n"
+    @peoples.each do |person|
+      puts "[#{person.class.name}] Name: #{person.name} ID: #{person.id} Age: #{person.age} \n"
     end
   end
 
@@ -47,13 +47,14 @@ class App
     puts 'Author:'
     author = gets.chomp
     @books << Book.new(title, author)
-    save_data_to_json(@books, 'books.json')
+    save_data_to_json('books.json', @books.map(&:to_hash))
     puts 'Book created successfully'
   end
 
   def create_rental()
-    @books = load_data_from_json('books.json')
-    @peoples = load_data_from_json('people.json')
+    @books = load_data_from_json('books.json') || []
+    @peoples = load_data_from_json('people.json') || []
+    @rentals = load_data_from_json('rentals.json') || []
 
     if @books.empty? || @peoples.empty?
       puts 'There are no books or people to create a rental'
@@ -68,13 +69,15 @@ class App
     
    
     @peoples.each.with_index do |person, idx|
-      puts "#{idx}) [#{person.class.name}] Name #{person.name}, ID #{person.id}, Age #{person.age}"
-    end
+      # if person.is_a?(Person)
+        puts "#{idx}) [#{person.class.name}] Name  #{person.name}, ID #{person.id}, Age #{person.age}"
+    # end
+  end
     person_index = gets.chomp.to_i
     puts 'Date:'
     date = gets.chomp
     @rentals << Rental.new(date, @books[book_index], @peoples[person_index])
-    save_data_to_json(@rentals, 'rentals.json')
+    save_data_to_json('rentals.json', @rentals.map(&:to_hash))
     puts 'Rental created successfully'
   end
 
@@ -112,21 +115,25 @@ class App
   end
 
   def load_data_from_json(filename)
-    if File.exist?(filename) and File.size(filename) != 0
-      # file_contents = File.read(filename)
-      # JSON.parse(file_contents)
-      # parsed_data = JSON.parse(file_contents)
-
-      # if parsed_data.is_a?(Array)
-      #   parsed_data.map { |data| create_person_from_hash(data) }
-      # else
-      #   []
-      # end
-      JSON.parse(File.read(filename))
-    else
-      []
+    if File.exist?(filename) && File.size(filename) != 0
+      json_data = JSON.parse(File.read(filename))
+  
+      json_data.map do |data|
+        Book.new(data['title'], data['author'])
+      end
+    # else
+    #   []
     end
   end
+  
+  # def load_data_from_json(filename)
+  #   if File.exist?(filename) && File.size(filename) != 0
+  #     json_data = JSON.parse(File.read(filename))
+  #     json_data.map { |data| Book.new(data['title'], data['author']) }
+  #   else
+  #     []
+  #   end
+  # end
 
   # def save_all_data
   #   save_data_to_json('books.json', @books)
