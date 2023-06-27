@@ -48,7 +48,7 @@ class App
     puts 'Author:'
     author = gets.chomp
     @books << Book.new(title, author)
-    save_data_to_json('books.json', @books.map(&:to_hash))
+    save_data_to_json('books.json', @books.map(&:to_h))
     puts 'Book created successfully'
   end
 
