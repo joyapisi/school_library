@@ -54,7 +54,8 @@ class SchoolLibraryApp
       app.list_rentals
     when 7
       puts 'Thank you for using this app!'
-      return false
+      app.save_all_data
+      exit
     else
       puts 'Oops! Wrong input. Please try again'
     end

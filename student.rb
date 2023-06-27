@@ -10,6 +10,15 @@ class Student < Person
     @classroom = classroom
   end
 
+  def to_h
+    {
+      classroom: @classroom,
+      age: @age,
+      name: @name,
+      parent_permission: @parent_permission
+    }
+  end
+
   def allocate_classroom(classroom)
     # @classroom = classroom
     classroom.students.push(self) unless classroom.student.include?(self)

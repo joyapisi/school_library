@@ -68,9 +68,10 @@ class App
 
   # Storing data to files using JSON...
   def save_data_to_json(filename, data)
-    File.open(filename, 'w') do |file|
-      file.write(JSON.generate(data))
-    end
+    # File.open(filename, 'w') do |file|
+    #   file.write(JSON.generate(data))
+    formatted_data = data.map(&:to_h)
+    File.write(filename, JSON.generate(formatted_data))
   end
 
   def load_data_from_json(filename)
@@ -88,4 +89,9 @@ class App
     save_data_to_json('rentals.json', @rentals)
   end
 
+  def load_all_data
+    @books = load_data_from_json('books.json')
+    @peoples = load_data_from_json('people.json')
+    @rentals = load_data_from_json('rentals.json')
+  end
 end
