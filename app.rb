@@ -1,4 +1,5 @@
 require 'json'
+require 'school_library_app.rb'
 require './person'
 require './teacher'
 require './student'
