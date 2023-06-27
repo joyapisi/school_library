@@ -1,3 +1,4 @@
+require 'json'
 require './person'
 require './teacher'
 require './student'
@@ -6,9 +7,12 @@ require './rental'
 
 class App
   def initialize
-    @books = []
-    @peoples = []
-    @rentals = []
+    # @books = []
+    # @peoples = []
+    # @rentals = []
+    @books = load_data_from_json('books.json')
+    @peoples = load_data_from_json('people.json')
+    @rentals = load_data_from_json('rentals.json')
   end
 
   def list_books()
@@ -61,4 +65,27 @@ class App
       end
     end
   end
+
+  # Storing data to files using JSON...
+  def save_data_to_json(filename, data)
+    File.open(filename, 'w') do |file|
+      file.write(JSON.generate(data))
+    end
+  end
+
+  def load_data_from_json(filename)
+    if File.exist?(filename)
+      file_contents = File.read(filename)
+      JSON.parse(file_contents)
+    else
+      []
+    end
+  end
+
+  def save_all_data
+    save_data_to_json('books.json', @books)
+    save_data_to_json('people.json', @peoples)
+    save_data_to_json('rentals.json', @rentals)
+  end
+
 end
