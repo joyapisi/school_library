@@ -1,5 +1,5 @@
 require 'json'
-require 'school_library_app.rb'
+require_relative 'school_library_app.rb'
 require './person'
 require './teacher'
 require './student'
@@ -78,7 +78,7 @@ class App
     puts 'Date:'
     date = gets.chomp
     @rentals << Rental.new(date, @books[book_index], @peoples[person_index])
-    save_data_to_json('rentals.json', @rentals.map(&:to_hash))
+    save_data_to_json('rentals.json', @rentals.map(&:to_h))
     puts 'Rental created successfully'
   end
 
