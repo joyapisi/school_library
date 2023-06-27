@@ -1,6 +1,11 @@
 require './app'
+# require_relative 'data_storage'
 
 class SchoolLibraryApp
+  # def initialize (@data_storage)
+  #   @data_storage = DataStorage.new
+  # end
+
   def user_options
     puts 'Welcome to School Library App!'
     puts 'Please choose an option by entering a number:
@@ -54,7 +59,7 @@ class SchoolLibraryApp
       app.list_rentals
     when 7
       puts 'Thank you for using this app!'
-      app.save_all_data
+      app.save_data_to_json
       exit
     else
       puts 'Oops! Wrong input. Please try again'
