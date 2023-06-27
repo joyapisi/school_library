@@ -67,17 +67,37 @@ class App
   end
 
   # Storing data to files using JSON...
+  def create_person_from_hash(data)
+    case data['type']
+    when 'Teacher'
+      Teacher.new(data['specialization'], data['age'], data['name'])
+    when 'Student'
+      Student.new(data['classroom'], data['age'], data['name'], parent_permission: data['parent_permission'])
+    else
+      # Handle unknown person type or return a default person object
+      Person.new(data['age'], data['name'], parent_permission: data['parent_permission'])
+    end
+  end
+
   def save_data_to_json(filename, data)
     # File.open(filename, 'w') do |file|
     #   file.write(JSON.generate(data))
     formatted_data = data.map(&:to_h)
-    File.write(filename, JSON.generate(formatted_data))
+    # json_data = JSON.generate(formatted_data)
+    File.write(filename, JSON.generate(formatted_data), mode: 'w')
   end
 
   def load_data_from_json(filename)
     if File.exist?(filename)
       file_contents = File.read(filename)
-      JSON.parse(file_contents)
+      # JSON.parse(file_contents)
+      parsed_data = JSON.parse(file_contents)
+
+      if parsed_data.is_a?(Array)
+        parsed_data.map { |data| create_person_from_hash(data) }
+      else
+        []
+      end
     else
       []
     end
@@ -85,7 +105,7 @@ class App
 
   def save_all_data
     save_data_to_json('books.json', @books)
-    save_data_to_json('people.json', @peoples)
+    save_data_to_json('people.json', @peoples.map(&:to_h))
     save_data_to_json('rentals.json', @rentals)
   end
 
