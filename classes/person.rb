@@ -18,15 +18,15 @@ class Person < Nameable
   #   "#{@name[:first_name]} #{@name[:last_name]}"
   # end
 
-  # def to_h
-  #   {
-  #     type: self.class.name,
-  #     age: @age,
-  #     name: @name,
-  #     parent_permission: @parent_permission,
-  #     rentals: @rentals
-  #   }
-  # end
+  def to_h
+    {
+      type: self.class.name,
+      age: @age,
+      name: @name,
+      parent_permission: @parent_permission,
+      rentals: @rentals
+    }
+  end
 
   def of_age?
     @age >= 18

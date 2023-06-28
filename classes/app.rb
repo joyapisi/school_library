@@ -9,10 +9,10 @@ require './rental'
 class App
   def initialize
     # @books = []
-    @peoples = []
+    # @peoples = []
     # @rentals = []
     @books = load_data_from_json('books.json') 
-    # @peoples = load_data_from_json('people.json') 
+    @peoples = load_data_from_json('people.json') 
     @rentals = load_data_from_json('rentals.json') 
   end
 
@@ -115,36 +115,57 @@ class App
     File.write(filename, JSON.generate(data), mode: 'w')
   end
 
+  # def load_data_from_json(filename)
+  #   if File.exist?(filename) && File.size(filename) != 0
+  #     json_data = JSON.parse(File.read(filename))
+  
+  #     json_data.map do |data|
+  #       Book.new(data['title'], data['author'])
+  #     end
+  #   else
+  #     []
+  #   end
+  # end
+
   def load_data_from_json(filename)
     if File.exist?(filename) && File.size(filename) != 0
       json_data = JSON.parse(File.read(filename))
   
       json_data.map do |data|
-        Book.new(data['title'], data['author'])
+        case data['type']
+        when 'Teacher'
+          Teacher.new(data['specialization'], data['age'], data['name'])
+        when 'Student'
+          Student.new(nil, data['age'], data['name'], parent_permission: data['parent_permission'])
+        else
+          Book.new(data['title'], data['author'])
+        end
       end
     else
       []
     end
   end
+  
+  
 
-  def load_data_from_json(filename)
-  if File.exist?(filename) && File.size(filename) != 0
-    json_data = JSON.parse(File.read(filename))
+#   def load_data_from_json(filename)
+#   if File.exist?(filename) && File.size(filename) != 0
+#     json_data = JSON.parse(File.read(filename))
 
-    json_data.map do |data|
-      case data['type']
-      when 'Teacher'
-        Teacher.new(data['specialization'], data['age'], data['name'])
-      when 'Student'
-        Student.new(nil, data['age'], data['name'], parent_permission: data['parent_permission'])
-      when 'Book'
-        Book.new(data['title'], data['author'])  
-    end
-end
-  else
-    []
-  end
-end
+#     json_data.map do |data|
+#       case data['type']
+#       when 'Teacher'
+#         Teacher.new(data['specialization'], data['age'], data['name'])
+#       when 'Student'
+#         Student.new(nil, data['age'], data['name'], parent_permission: data['parent_permission'])
+#       when 'Book'
+#         Book.new(data['title'], data['author'])  
+#     end
+# end
+#   else
+#     []
+#   end
+# end
   
   # def load_data_from_json(filename)
   #   if File.exist?(filename) && File.size(filename) != 0
