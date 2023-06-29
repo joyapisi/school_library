@@ -1,4 +1,4 @@
-require './app'
+require_relative 'app'
 # require_relative 'data_storage'
 
 class SchoolLibraryApp

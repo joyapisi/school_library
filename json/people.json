@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "type": "Student",
+    "id": 706,
+    "name": "fdfs",
+    "age": 13,
+    "parent_permission": true
+  }
+]
